@@ -1,0 +1,5 @@
+importFrom("utils", "askYesNo", "download.file", "read.table", "unzip")
+export(
+    "csv_datasets",
+    "fetch_csv"
+)

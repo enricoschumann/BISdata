@@ -1,0 +1,19 @@
+Package: BISdata
+Type: Package
+Title: Download Data from the Bank for International Settlements (BIS)
+Version: 0.1-0
+Date: 2021-11-18
+Maintainer: Enrico Schumann <es@enricoschumann.net>
+Authors@R: person("Enrico", "Schumann",
+                  role  = c("aut", "cre"),
+                  email = "es@enricoschumann.net",
+                  comment = c(ORCID = "0000-0001-7601-6576"))
+Description: Functions for downloading data from the
+     Bank for International Settlements (BIS) in Basel.
+     Supported are only full datasets in CSV format.
+     Downloaded data may optionally be cached, so as to
+     avoid repeated downloads of the same files.
+License: GPL-3
+URL: http://enricoschumann.net/NMOF.htm,
+LazyLoad: yes
+ByteCompile: yes
