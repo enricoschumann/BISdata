@@ -1,0 +1,13 @@
+2021-11-20  Enrico Schumann  <es@enricoschumann.net>
+
+        * R/functions.R: export functions 'datasets'
+        and 'fetch_dataset'; remove "csv" from names as
+        apparently not all full datasets are in CSV
+        format
+        (process_dataset): add support for transforming
+        datasets into 'zoo' series
+        (datasets): return "filename", "description"
+        and date of last "update"
+
+        * README.org: add README
+
