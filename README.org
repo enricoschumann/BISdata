@@ -70,13 +70,13 @@ Fetch a particular dataset.
 
 #+BEGIN_SRC R :results output :exports both :session **R**
   data <- fetch_dataset(dest.dir = "~/Downloads/BIS",
-			dataset = "full_bis_total_credit_csv.zip")
+                        dataset = "full_bis_total_credit_csv.zip")
   str(data)
 #+END_SRC
 
 #+RESULTS:
 #+begin_example
-'data.frame':	1133 obs. of  339 variables:
+'data.frame':   1133 obs. of  339 variables:
  $ FREQ              : chr  "Q" "Q" "Q" "Q" ...
  $ Frequency         : chr  "Quarterly" "Quarterly" "Quarterly" "Quarterly" ...
  $ BORROWERS_CTY     : chr  "4T" "4T" "4T" "4T" ...
@@ -121,8 +121,8 @@ Transform data into [[https://cran.r-project.org/package=zoo][zoo]].
 #+BEGIN_SRC R :results output :exports both :session **R**
   library("zoo")
   data <- fetch_dataset(dest.dir = "~/Downloads/BIS",
-			dataset = "full_bis_total_credit_csv.zip",
-			return.class = "zoo")
+                        dataset = "full_bis_total_credit_csv.zip",
+                        return.class = "zoo")
   summary(data)
 #+END_SRC
 

@@ -101,6 +101,7 @@ process_dataset <- function(f.path, exdir, return.class, ...) {
             colnames(ans) <- colnames(attr(ans, "headers")) <-
                 txt[["Time Period"]]
         }
-    }
+    } else
+        ans <- txt
     ans
 }
