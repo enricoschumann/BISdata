@@ -2,8 +2,12 @@ datasets <-
 function(url = "https://www.bis.org/statistics/full_data_sets.htm", ...) {
 
     u <- url(url)
-    txt <- readLines(u)
+    txt <- try(readLines(u), silent = TRUE)
     close(u)
+    if (inherits(txt, "try-error")) {
+        warning("download failed with message ", sQuote(txt, FALSE))
+        return(invisible(NULL))
+    }
     txt <- txt[grep('href=./statistics.*full.*zip', txt)]
 
     fn <- gsub(".*(full[^/]+?zip).*", "\\1", txt)
@@ -51,9 +55,13 @@ function(dest.dir, dataset,
     dataset <- paste0(bis.url, dataset)
     f.path <- file.path(normalizePath(dest.dir), f.name)
 
-    if (!file.exists(f.path))
-        dl.result <- download.file(dataset, f.path)
-    else
+    if (!file.exists(f.path)) {
+        dl.result <- try(download.file(dataset, f.path), silent = TRUE)
+        if (inherits(dl.result, "try-error")) {
+            warning("download failed with message ", sQuote(dl.result, FALSE))
+            return(invisible(NULL))
+        }
+    } else
         dl.result <- 0
 
     if (dl.result != 0L) {

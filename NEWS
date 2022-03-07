@@ -1,4 +1,4 @@
-v0.1-0  (2021-12-??; not released yet)
+v0.1-0  (2022-03-07)
 
   o First release. The package provides functions for
     downloading data from the Bank for International
@@ -10,6 +10,3 @@ v0.1-0  (2021-12-??; not released yet)
     such as 'zoo' objects. Downloaded data can optionally
     be cached, to avoid repeated downloads of the same
     files.
-  
-  o ....
-

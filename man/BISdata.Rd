@@ -28,18 +28,16 @@ datasets(url = "https://www.bis.org/statistics/full_data_sets.htm", \dots)
     the name of the file
   }
   \item{bis.url}{
-    the base url
+    the base \acronym{url}
   }
   \item{url}{
-    the url from which to fetch information about the datasets
+    the \acronym{url} from which to fetch information about the datasets
   }
   \item{exdir}{
     file path: where to unzip?
   }
-
   \item{return.class}{\code{NULL} or character: currently, only
     \code{\link[zoo]{zoo}} is supported
-
   }
   \item{\dots}{
     currently not used
@@ -47,9 +45,18 @@ datasets(url = "https://www.bis.org/statistics/full_data_sets.htm", \dots)
 }
 \details{
 
-  Supported are  full datasets (typically) in \acronym{CSV}
-  format.  Downloaded data may optionally be cached, to
-  avoid repeated downloads of the same files.
+  
+  Supported are full datasets (typically) in
+  \acronym{CSV} format.  Downloaded data may
+  optionally be cached, to avoid repeated downloads
+  of the same files.
+
+  If the download fails with an error, then both
+  functions will return \code{NULL}. For
+  \code{fetch_dataset}, if the download failed with
+  a warning from \code{\link{download.file}}, then
+  the function will evaluate to the return value of
+  \code{\link{download.file}}.
 
 }
 \value{
@@ -75,5 +82,4 @@ datasets(url = "https://www.bis.org/statistics/full_data_sets.htm", \dots)
 datasets()
 bis.data <- fetch_dataset(dest.dir = tempdir(),
                           "full_bis_total_credit_csv.zip")
-}
-}
+}}
