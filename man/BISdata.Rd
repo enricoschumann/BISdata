@@ -71,9 +71,9 @@ datasets(url = "https://www.bis.org/statistics/full_data_sets.htm", \dots)
 %% }
 \examples{
 \donttest{
+## (Internet connection required)
 datasets()
-bis.data <- fetch_dataset(tempdir(),
+bis.data <- fetch_dataset(dest.dir = tempdir(),
                           "full_bis_total_credit_csv.zip")
 }
-
 }
