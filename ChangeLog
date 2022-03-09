@@ -1,7 +1,9 @@
 2022-03-07  Enrico Schumann  <es@enricoschumann.net>
 
-	* R/functions.R (datasets, fetch_dataset): if
-	downloads fail, the functions now return NULL
+        * DESCRIPTION (Version): 0.1-1
+
+        * R/functions.R (datasets, fetch_dataset): if
+        downloads fail, the functions now return NULL
 
 2021-11-20  Enrico Schumann  <es@enricoschumann.net>
 
