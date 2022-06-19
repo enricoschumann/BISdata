@@ -69,11 +69,11 @@ function(dest.dir, dataset,
         return(invisible(NULL))
     }
 
+    ## TODO apply filespecific parsing
     txt <- process_dataset(f.path,
                            exdir = exdir,
-                           return.class = return.class)
+                           return.class = return.class, ...)
 
-    ## TODO apply filespecific parsing
     txt
 }
 
@@ -83,7 +83,8 @@ process_dataset <- function(f.path, exdir, return.class, ...) {
     on.exit(file.remove(tmp))
     txt <- read.table(tmp, header = TRUE, sep = ",",
                       stringsAsFactors = FALSE,
-                      check.names = FALSE)
+                      check.names = FALSE,
+                      fill = TRUE, ...)
 
     if (is.null(return.class))
         return(txt)
@@ -108,7 +109,20 @@ process_dataset <- function(f.path, exdir, return.class, ...) {
             attr(ans, "headers") <- t(txt[, seq_len(j)])
             colnames(ans) <- colnames(attr(ans, "headers")) <-
                 txt[["Time Period"]]
+        } else if (grepl("full_xru_d_csv_row.zip",
+                         basename(f.path), fixed = TRUE)) {
+            i <- which(txt[[1]] == "Time Period")
+            ans <- txt[-seq_len(i), -1]
+            ans <- apply(ans, 2, as.numeric)
+            
+            t <- as.Date(txt[-seq_len(i), 1])
+            ans <- zoo(ans, t)
+            attr(ans, "headers") <- txt[seq_len(i), -1]
+
+            colnames(ans) <- colnames(attr(ans, "headers"))  <-
+                txt[i, -1]
         }
+
     } else
         ans <- txt
     ans
