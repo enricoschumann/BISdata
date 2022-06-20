@@ -1,9 +1,15 @@
+2022-06-20  Enrico Schumann  <es@enricoschumann.net>
+
+        * R/functions.R (fetch_dataset, process_dataset):
+        add 'zoo' support for dataset "full_xru_csv.zip";
+        'fetch_dataset' gains an argument 'frequency'
+
 2022-06-19  Enrico Schumann  <es@enricoschumann.net>
 
         * R/functions.R (process_dataset): use
         'read.table(fill = TRUE, ...)' for reading datasets
-        (process_dataset): add 'zoo' support for dataset
-        "full_xru_d_csv_row.zip"
+        (fetch_dataset, process_dataset): add 'zoo'
+        support for dataset "full_xru_d_csv_row.zip"
 
 2022-03-07  Enrico Schumann  <es@enricoschumann.net>
 

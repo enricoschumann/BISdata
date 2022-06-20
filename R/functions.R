@@ -32,11 +32,13 @@ function(url = "https://www.bis.org/statistics/full_data_sets.htm", ...) {
 }
 
 
+
 fetch_dataset <-
 function(dest.dir, dataset,
          bis.url = "https://www.bis.org/statistics/",
          exdir = tempdir(),
          return.class = NULL,
+         frequency = NULL,
          ...) {
 
 
@@ -69,27 +71,33 @@ function(dest.dir, dataset,
         return(invisible(NULL))
     }
 
-    ## TODO apply filespecific parsing
     txt <- process_dataset(f.path,
                            exdir = exdir,
-                           return.class = return.class, ...)
+                           return.class = return.class,
+                           frequency = frequency,
+                           ...)
 
     txt
 }
 
-process_dataset <- function(f.path, exdir, return.class, ...) {
+
+
+process_dataset <- function(f.path, exdir, return.class, frequency, ...) {
 
     tmp <- unzip(f.path, exdir = exdir)
     on.exit(file.remove(tmp))
     txt <- read.table(tmp, header = TRUE, sep = ",",
                       stringsAsFactors = FALSE,
                       check.names = FALSE,
+                      na.strings = "",
+                      quote = "",
                       fill = TRUE, ...)
 
     if (is.null(return.class))
         return(txt)
 
     if (return.class == "zoo") {
+
         if (!requireNamespace("zoo")) {
             warning("package ", sQuote("zoo"), " not available")
             return(txt)
@@ -114,13 +122,54 @@ process_dataset <- function(f.path, exdir, return.class, ...) {
             i <- which(txt[[1]] == "Time Period")
             ans <- txt[-seq_len(i), -1]
             ans <- apply(ans, 2, as.numeric)
-            
+
             t <- as.Date(txt[-seq_len(i), 1])
-            ans <- zoo(ans, t)
+            ans <- zoo::zoo(ans, t)
             attr(ans, "headers") <- txt[seq_len(i), -1]
 
             colnames(ans) <- colnames(attr(ans, "headers"))  <-
                 txt[i, -1]
+        } else if (grepl("full_xru_csv.zip", f.path, fixed = TRUE)) {
+            if (is.null(frequency)) {
+                message(sQuote("frequency"), " set to ", sQuote("annual"))
+                frequency <- "annual"
+            } else if (!frequency %in% c("annual", "quarterly", "monthly")) {
+                stop(sQuote("frequency"), " must be ",
+                     sQuote("annual"), ", ",
+                     sQuote("quarterly"), " or ",
+                     sQuote("monthly"))
+            }
+            if (frequency == "annual") {
+                t.re <- "^[0-9]{4}$"
+                txt <- txt[txt$FREQ == "A", ]
+                t <- colnames(txt)[grepl(t.re, colnames(txt))]
+
+                ans <- t(txt[, grepl(t.re, colnames(txt))])
+                ans <- zoo::zoo(ans, t)
+                j <- which(colnames(txt) == "Series")
+                attr(ans, "headers") <- t(txt[, seq_len(j)])
+                colnames(ans) <- colnames(attr(ans, "headers")) <- txt[, j]
+            } else if (frequency == "quarterly") {
+                t.re <- "^[0-9]{4}-Q[0-9]$"
+                txt <- txt[txt$FREQ == "Q", ]
+                t <- colnames(txt)[grepl(t.re, colnames(txt))]
+                t <- zoo::as.yearqtr(t, format = "%Y-Q%q")
+                ans <- t(txt[, grepl(t.re, colnames(txt))])
+                ans <- zoo::zoo(ans, t)
+                j <- which(colnames(txt) == "Series")
+                attr(ans, "headers") <- t(txt[, seq_len(j)])
+                colnames(ans) <- colnames(attr(ans, "headers")) <- txt[, j]
+            } else if (frequency == "monthly") {
+                t.re <- "^[0-9]{4}-[^Q][0-9]$"
+                txt <- txt[txt$FREQ == "M", ]
+                t <- colnames(txt)[grepl(t.re, colnames(txt))]
+                t <- zoo::as.yearmon(t)
+                ans <- t(txt[, grepl(t.re, colnames(txt))])
+                ans <- zoo::zoo(ans, t)
+                j <- which(colnames(txt) == "Series")
+                attr(ans, "headers") <- t(txt[, seq_len(j)])
+                colnames(ans) <- colnames(attr(ans, "headers")) <- txt[, j]
+            }
         }
 
     } else
