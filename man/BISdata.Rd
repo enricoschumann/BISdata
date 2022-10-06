@@ -41,15 +41,15 @@ datasets(url = "https://www.bis.org/statistics/full_data_sets.htm", \dots)
     \code{\link[zoo]{zoo}} is supported
   }
   \item{frequency}{
-    string, or nothing (\code{NULL}) 
+    string, or nothing (\code{NULL})
   }
   \item{\dots}{
-    currently not used
+    passed on to \code{\link{read.table}}
   }
 }
 \details{
 
-  
+
   Supported are full datasets (typically) in
   \acronym{CSV} format.  Downloaded data may
   optionally be cached, to avoid repeated downloads
