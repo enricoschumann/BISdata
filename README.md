@@ -2,7 +2,7 @@
 
 Functions for downloading data from the Bank for
 International Settlements (BIS;
-(https://www.bis.org/)[https://www.bis.org/]) in Basel.
+<https://www.bis.org/>) in Basel.
 Supported are only full datasets in (typically) CSV
 format.  The package is lightweight and without
 dependencies; suggested packages are used only if data
