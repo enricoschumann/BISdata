@@ -19,6 +19,7 @@ Description: Functions for downloading data from the Bank for
 Suggests: zoo
 License: GPL-3
 URL: http://enricoschumann.net/R/packages/BISdata/,
+     https://git.sr.ht/~enricoschumann/BISdata ,
      https://github.com/enricoschumann/BISdata
 LazyLoad: yes
 ByteCompile: yes
