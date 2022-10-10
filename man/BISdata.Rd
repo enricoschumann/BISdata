@@ -17,7 +17,15 @@ fetch_dataset(dest.dir, dataset,
               exdir = tempdir(),
               return.class = NULL,
               frequency = NULL,
-              \dots)
+              \dots,
+              header = TRUE,
+              sep = ",",
+              stringsAsFactors = FALSE,
+              check.names = FALSE,
+              na.strings = "",
+              quote = "\"",
+              fill = TRUE)
+
 datasets(url = "https://www.bis.org/statistics/full_data_sets.htm", \dots)
 
 }
@@ -44,6 +52,10 @@ datasets(url = "https://www.bis.org/statistics/full_data_sets.htm", \dots)
     string, or nothing (\code{NULL})
   }
   \item{\dots}{
+    passed on to \code{\link{read.table}}
+  }
+  \item{header, sep, stringsAsFactors, check.names,
+        na.strings, quote, fill}{
     passed on to \code{\link{read.table}}
   }
 }

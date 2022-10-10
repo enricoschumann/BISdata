@@ -1,10 +1,24 @@
+2022-10-10  Enrico Schumann  <es@enricoschumann.net>
+
+        * R/functions.R (fetch_dataset): the function
+        gains several arguments, such as 'header' and
+        'sep', which define the default settings for
+        'read.table'. Further arguments can, as before, be
+        passed via "...".
+
+        The default setting for argument 'quote' now is
+        "\"", which fixes the parsing of datasets such as
+        'full_spp_csv.zip' that use double-quoted elements;
+        thanks to Matthias Meiksner for reporting the
+        issue on GitHub
+
 2022-10-06  Enrico Schumann  <es@enricoschumann.net>
 
         * DESCRIPTION (Version): 0.2-0
 
 2022-06-20  Enrico Schumann  <es@enricoschumann.net>
 
-        * R/functions.R (fetch_dataset, process_dataset):
+        * R/functions.R (fetch_dataset,process_dataset):
         add 'zoo' support for dataset "full_xru_csv.zip";
         'fetch_dataset' gains an argument 'frequency'
 
@@ -19,7 +33,7 @@
 
         * DESCRIPTION (Version): 0.1-1
 
-        * R/functions.R (datasets, fetch_dataset): if
+        * R/functions.R (datasets,fetch_dataset): if
         downloads fail, the functions now return NULL
 
 2021-11-20  Enrico Schumann  <es@enricoschumann.net>

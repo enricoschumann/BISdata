@@ -1,3 +1,17 @@
+v0.2-1  (2022-??-??; not yet released)
+
+  o 'fetch_dataset' gains several arguments, such as
+    'header' and 'sep', which define the default settings
+    for 'read.table'. The function now correctly parses
+    datasets such as 'full_spp_csv.zip' that use
+    double-quoted elements, (thanks to Matthias
+    Meiksner/IZE85 for reporting on GitHub)
+
+  o there is an additional public repository at sourcehut:
+    https://git.sr.ht/~enricoschumann/BISdata
+
+  o ....
+
 v0.2-0  (2022-10-06)
 
   o more datasets are now supported

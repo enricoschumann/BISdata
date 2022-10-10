@@ -39,7 +39,14 @@ function(dest.dir, dataset,
          exdir = tempdir(),
          return.class = NULL,
          frequency = NULL,
-         ...) {
+         ...,
+         header = TRUE,
+         sep = ",",
+         stringsAsFactors = FALSE,
+         check.names = FALSE,
+         na.strings = "",
+         quote = "\"",
+         fill = TRUE) {
 
 
     if (!dir.exists(dest.dir)) {
@@ -75,23 +82,41 @@ function(dest.dir, dataset,
                            exdir = exdir,
                            return.class = return.class,
                            frequency = frequency,
-                           ...)
-
+                           ...,
+                           header = header,
+                           sep = sep,
+                           stringsAsFactors = stringsAsFactors,
+                           check.names = check.names,
+                           na.strings = na.strings,
+                           quote = quote,
+                           fill = fill)
     txt
 }
 
 
 
-process_dataset <- function(f.path, exdir, return.class, frequency, ...) {
+process_dataset <-
+function(f.path, exdir, return.class, frequency,
+         ...,
+         header,
+         sep,
+         stringsAsFactors,
+         check.names,
+         na.strings,
+         quote,
+         fill) {
 
     tmp <- unzip(f.path, exdir = exdir)
     on.exit(file.remove(tmp))
-    txt <- read.table(tmp, header = TRUE, sep = ",",
-                      stringsAsFactors = FALSE,
-                      check.names = FALSE,
-                      na.strings = "",
-                      quote = "",
-                      fill = TRUE, ...)
+    txt <- read.table(tmp,
+                      header = header,
+                      sep = sep,
+                      stringsAsFactors = stringsAsFactors,
+                      check.names = check.names,
+                      na.strings = na.strings,
+                      quote = quote,
+                      fill = fill,
+                      ...)
 
     if (is.null(return.class))
         return(txt)
