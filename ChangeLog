@@ -1,3 +1,7 @@
+2022-11-15  Enrico Schumann  <es@enricoschumann.net>
+
+        * DESCRIPTION (Version): 0.2-1
+
 2022-10-10  Enrico Schumann  <es@enricoschumann.net>
 
         * R/functions.R (fetch_dataset): the function
