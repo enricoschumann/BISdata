@@ -77,7 +77,6 @@ function(dest.dir, dataset,
         warning("download failed with code ", dl.result, "; see ?download.file")
         return(invisible(NULL))
     }
-
     txt <- process_dataset(f.path,
                            exdir = exdir,
                            return.class = return.class,
@@ -195,6 +194,15 @@ function(f.path, exdir, return.class, frequency,
                 attr(ans, "headers") <- t(txt[, seq_len(j)])
                 colnames(ans) <- colnames(attr(ans, "headers")) <- txt[, j]
             }
+        } else if (grepl("full_cbpol_d_csv_row.zip", f.path, fixed = TRUE)) {
+            i <- which(txt[, 1L] == "Time Period")
+            ans <- txt[-seq_len(i), -1]
+            ans <- apply(ans, 2, as.numeric)/100
+            ans <- zoo::zoo(ans, as.Date(txt[-seq_len(i), 1]))
+            attr(ans, "headers") <- txt[seq_len(i), -1]
+            colnames(ans) <- txt[i, -1]
+            rownames(attr(ans, "headers")) <- txt[seq_len(i), 1]
+            colnames(attr(ans, "headers")) <- txt[i, -1]
         }
 
     } else

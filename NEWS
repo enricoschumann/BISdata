@@ -1,3 +1,8 @@
+v0.2-2  (2023-09-11)
+
+  o add 'zoo' support for dataset central-bank policy
+    rates ("full_cbpol_d_csv_row.zip")
+
 v0.2-1  (2022-11-15)
 
   o 'fetch_dataset' gains several arguments, such as
