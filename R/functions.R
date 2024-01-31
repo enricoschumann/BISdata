@@ -35,7 +35,7 @@ function(url = "https://www.bis.org/statistics/full_data_sets.htm", ...) {
 
 fetch_dataset <-
 function(dest.dir, dataset,
-         bis.url = "https://data.bis.org/bulkdownload/",
+         bis.url = "https://data.bis.org/static/bulk/",
          exdir = tempdir(),
          return.class = NULL,
          frequency = NULL,
