@@ -35,7 +35,7 @@ function(url = "https://www.bis.org/statistics/full_data_sets.htm", ...) {
 
 fetch_dataset <-
 function(dest.dir, dataset,
-         bis.url = "https://www.bis.org/statistics/",
+         bis.url = "https://data.bis.org/bulkdownload/",
          exdir = tempdir(),
          return.class = NULL,
          frequency = NULL,
@@ -203,7 +203,8 @@ function(f.path, exdir, return.class, frequency,
             colnames(ans) <- txt[i, -1]
             rownames(attr(ans, "headers")) <- txt[seq_len(i), 1]
             colnames(attr(ans, "headers")) <- txt[i, -1]
-        }
+        } else
+            ans <- txt
 
     } else
         ans <- txt

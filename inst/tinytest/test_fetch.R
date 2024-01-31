@@ -1,6 +1,6 @@
 if (Sys.getenv("ES_PACKAGE_TESTING_73179826243954") == "true") {
 
-    archive.dir <- "~/Downloads/BIS"
+    archive.dir <- "~/Downloads/BISdata"
     if (!dir.exists(archive.dir))
         dir.create(archive.dir)
 

@@ -1,8 +1,8 @@
 Package: BISdata
 Type: Package
 Title: Download Data from the Bank for International Settlements (BIS)
-Version: 0.2-2
-Date: 2023-09-11
+Version: 0.2-3
+Date: 2024-01-31
 Maintainer: Enrico Schumann <es@enricoschumann.net>
 Authors@R: person("Enrico", "Schumann",
                   role  = c("aut", "cre"),

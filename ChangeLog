@@ -1,3 +1,13 @@
+2024-01-31  Enrico Schumann  <es@enricoschumann.net>
+
+        * R/functions.R (fetch_dataset): change root URL
+        from "https://www.bis.org/statistics/" to
+        "https://data.bis.org/bulkdownload/" to accommodate
+        bulk downloads of datasets -- the BIS has announced
+        to no longer provide the datasets at
+        https://www.bis.org/statistics/full_data_sets.htm
+        from January 2024
+
 2023-09-11  Enrico Schumann  <es@enricoschumann.net>
 
         * DESCRIPTION (Version): 0.2-2

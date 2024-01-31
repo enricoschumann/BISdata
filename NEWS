@@ -1,3 +1,16 @@
+v0.2-3  (2024-01-31; not released yet)
+
+  o The BIS has announced to discontinue the provision of the
+    CSV datasets listed at
+    https://www.bis.org/statistics/full_data_sets.htm.
+    Bulk downloads should be made from the new BIS data portal.
+    Argument 'bis.url' has been changed accordingly, though as
+    of 31 January the old datasets were still available and
+    could be retrieved with
+      bis.url = "https://www.bis.org/statistics/" .
+
+  o ....
+
 v0.2-2  (2023-09-11)
 
   o add 'zoo' support for dataset central-bank policy
