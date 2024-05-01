@@ -13,7 +13,7 @@
 }
 \usage{
 fetch_dataset(dest.dir, dataset,
-              bis.url = "https://www.bis.org/statistics/",
+              bis.url = "https://data.bis.org/static/bulk/",
               exdir = tempdir(),
               return.class = NULL,
               frequency = NULL,
@@ -26,8 +26,7 @@ fetch_dataset(dest.dir, dataset,
               quote = "\"",
               fill = TRUE)
 
-datasets(url = "https://www.bis.org/statistics/full_data_sets.htm", \dots)
-
+datasets(url = "https://data.bis.org/bulkdownload", \dots)
 }
 \arguments{
   \item{dest.dir}{
@@ -89,13 +88,10 @@ datasets(url = "https://www.bis.org/statistics/full_data_sets.htm", \dots)
 \author{
   Enrico Schumann
 }
-%% \seealso{
-%%   package
-%% }
 \examples{
 \donttest{
 ## (Internet connection required)
 datasets()
 bis.data <- fetch_dataset(dest.dir = tempdir(),
-                          "full_bis_total_credit_csv.zip")
+                          "WS_CBPOL_csv_col.zip")
 }}

@@ -1,7 +1,6 @@
 .es_keywords
 .git
 .gitignore
-ChangeLog
 R/dev.R
 README.org
 TODO

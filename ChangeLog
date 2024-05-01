@@ -1,3 +1,10 @@
+2024-05-01  Enrico Schumann  <es@enricoschumann.net>
+
+        * DESCRIPTION (Version): 0.2-3
+
+        * R/functions.R (datasets): rewrite function to at
+        least provide names of CSV files
+
 2024-01-31  Enrico Schumann  <es@enricoschumann.net>
 
         * Scripts/tests.R: add test script

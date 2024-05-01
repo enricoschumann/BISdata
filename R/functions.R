@@ -1,34 +1,22 @@
 datasets <-
-function(url = "https://www.bis.org/statistics/full_data_sets.htm", ...) {
-
+function(url = "https://data.bis.org/bulkdownload", ...) {
     u <- url(url)
-    txt <- try(readLines(u), silent = TRUE)
-    close(u)
+    txt <- try(readLines(u, warn = FALSE), silent = TRUE)
+    try(close(u), silent = TRUE)
     if (inherits(txt, "try-error")) {
         warning("download failed with message ", sQuote(txt, FALSE))
         return(invisible(NULL))
     }
-    txt <- txt[grep('href=./statistics.*full.*zip', txt)]
+    txt <- paste(txt, collapse = "")
 
-    fn <- gsub(".*(full[^/]+?zip).*", "\\1", txt)
-
-    descr <- gsub("<[^>]*?>", "", txt)
-    descr <- gsub("&nbsp;", " ", descr)
-    descr <- gsub("(.*[)]).*", "\\1", descr)
-
-    upd <- gsub("&nbsp;", " ", txt)
-    upd <- gsub("<[^>]*?>", "", upd)
-    upd <- gsub(paste0(".*?([0-9]+ (",
-                       paste(month.name, collapse = "|"),
-                       ") [0-9]+).*"), "\\1", upd)
-    for (i in 1:12)
-        upd <- sub(month.name[i], i, upd)
-    upd <- as.Date(upd, "%d %m %Y")
-
+    m <- gregexec("/static/bulk/(.{1,110}zip)", txt, perl = TRUE)
+    mm <- regmatches(txt, m, invert = FALSE)[[1]][2, ]
+    fn <- mm[grep("_csv", mm, ignore.case = TRUE)]
+    fn <- unique(fn)
 
     data.frame(filename = trimws(fn),
-               description = trimws(descr),
-               updated = upd)
+               description = NA,
+               updated = NA)
 }
 
 

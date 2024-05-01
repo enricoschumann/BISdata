@@ -13,3 +13,22 @@ for (file in files) {
     fetch_dataset(dest.dir = "~/Downloads/BISdata",
                   dataset = file)
 }
+
+
+
+
+## Commercial Property Prices
+d <- BISdata::fetch_dataset(dataset = "WS_CPP_csv_col.zip",
+                            dest.dir = "~/Downloads/BISdata")
+
+d <- BISdata::fetch_dataset(dataset = "WS_CPP_csv_flat.zip",
+                            dest.dir = "~/Downloads/BISdata")
+d$"TIME_PERIOD:Time period or range"
+
+## Consumer prices
+d <- BISdata::fetch_dataset(dataset = "WS_LONG_CPI_csv_col.zip",
+                            dest.dir = "~/Downloads/BISdata")
+d <- BISdata::fetch_dataset(dataset = "WS_LONG_CPI_csv_flat.zip",
+                            dest.dir = "~/Downloads/BISdata")
+
+
