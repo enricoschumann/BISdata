@@ -1,3 +1,9 @@
+2024-05-16  Enrico Schumann  <es@enricoschumann.net>
+
+        * R/functions.R (process_dataset): add 'zoo'
+        support for dataset central-bank policy rates
+        ["WS_CBPOL_csv_flat" and CPI ["WS_LONG_CPI_csv_flat"]
+
 2024-05-01  Enrico Schumann  <es@enricoschumann.net>
 
         * DESCRIPTION (Version): 0.2-3

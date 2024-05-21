@@ -1,3 +1,10 @@
+v0.3-0  (2024-05-16; not yet released)
+
+  o add 'zoo' support for dataset central-bank policy rates
+    ("WS_CBPOL_csv_flat") and CPI ("WS_LONG_CPI_csv_flat")
+
+  o ....
+
 v0.2-3  (2024-05-01)
 
   o The BIS has announced to discontinue the provision of the

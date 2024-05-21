@@ -60,18 +60,22 @@ datasets(url = "https://data.bis.org/bulkdownload", \dots)
 }
 \details{
 
+  Supported are full datasets (typically) in \acronym{CSV}
+  format.  Downloaded data can optionally be cached, to
+  avoid repeated downloads of the same files.
 
-  Supported are full datasets (typically) in
-  \acronym{CSV} format.  Downloaded data may
-  optionally be cached, to avoid repeated downloads
-  of the same files.
+  The default download fetches the data and puts them into
+  a \code{\link{data.frame}}.  If \code{return.class} is
+  not \code{NULL}, \code{fetch_dataset} selects/transforms
+  data; but this is only supported for few datasets.
 
   If the download fails with an error, then both
-  functions will return \code{NULL}. For
-  \code{fetch_dataset}, if the download failed with
-  a warning from \code{\link{download.file}}, then
-  the function will evaluate to the return value of
+  functions will return \code{NULL}.  For
+  \code{fetch_dataset}, if the download failed with a
+  warning from \code{\link{download.file}}, then the
+  function will evaluate to the return value of
   \code{\link{download.file}}.
+
 
 }
 \value{

@@ -93,9 +93,9 @@ function(f.path, exdir, return.class, frequency,
          quote,
          fill) {
 
-    tmp <- unzip(f.path, exdir = exdir)
-    on.exit(file.remove(tmp))
-    txt <- read.table(tmp,
+    x.file <- unzip(f.path, exdir = exdir)
+    on.exit(file.remove(x.file))
+    txt <- read.table(x.file,
                       header = header,
                       sep = sep,
                       stringsAsFactors = stringsAsFactors,
@@ -191,6 +191,42 @@ function(f.path, exdir, return.class, frequency,
             colnames(ans) <- txt[i, -1]
             rownames(attr(ans, "headers")) <- txt[seq_len(i), 1]
             colnames(attr(ans, "headers")) <- txt[i, -1]
+        } else if (grepl("WS_CBPOL_csv_flat", f.path, fixed = TRUE) ||
+                   grepl("WS_LONG_CPI_csv_flat", f.path, fixed = TRUE)) {
+            j <- grep("FREQ", colnames(txt))
+            if (!length(j) || length(j) > 1L) {
+                warning("could not determine frequency")
+                return(txt)
+            }
+            txt <- txt[grepl(frequency, txt[[j]], ignore.case = TRUE), ]
+            
+            areas <- sort(unique(txt[["REF_AREA:Reference area"]]))
+            areas.data <- list()
+            for (area in areas) {
+                i <- txt[["REF_AREA:Reference area"]] == area
+                if (grepl("WS_LONG_CPI_csv_flat", f.path, fixed = TRUE))
+                    i <- i &
+                        txt[["UNIT_MEASURE:Unit of measure"]] == "771: Year-on-year changes, in per cent"
+                tmp <- txt[i, c("TIME_PERIOD:Time period or range",
+                                "OBS_VALUE:Observation Value")]
+                t <- tmp[[1]]
+                areas.data[[area]] <- zoo::zoo(tmp[[2]], t)                
+            }
+
+            timestamp <- sort(unique(unlist(lapply(areas.data, time))))
+            A <- array(NA_real_,
+                       dim = c(length(timestamp), length(areas)))
+            colnames(A) <- areas
+            for (j in seq_along(areas.data)) {
+                i <- match(time(areas.data[[j]]), timestamp,
+                           nomatch = 0L)
+                A[i, j] <- zoo::coredata(areas.data[[j]])[i > 0]
+            }
+            if (frequency == "daily")
+                timestamp <- as.Date(timestamp)
+            else if (frequency == "monthly")
+                timestamp <- as.Date(paste0(timestamp, "-1"))
+            ans <- zoo(A, timestamp)
         } else
             ans <- txt
 
